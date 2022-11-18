@@ -4,23 +4,19 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.substr(1).toLowerCase();
-    if (!CHOICES.includes(playerSelection)) {
-        return "Are you taking the piss?"
-    }
-    
-    if (playerSelection === computerSelection) {
-        console.log(`It's a tie. ${playerSelection} = ${computerSelection}.`);
-        return null;
-    }
-    if (playerSelection === "Rock" && computerSelection === "Scissors" //
-        || playerSelection === "Paper" && computerSelection === "Rock" //
-        || playerSelection === "Scissors" && computerSelection === "Paper") {
+    let playerValue = CHOICES.indexOf(playerSelection);
+    let computerValue = CHOICES.indexOf(computerSelection);
+    result = playerValue - computerValue;
+    if (result === 1 || result === -2) {
         console.log(`You win! ${playerSelection} beats ${computerSelection}.`);
         return 0;
     }
-    console.log(`You lose! ${computerSelection} beats ${playerSelection}.`);
-    return 1;
+    if (result === -1 || result === 2) {
+        console.log(`You lose! ${computerSelection} beats ${playerSelection}.`);
+        return 1;
+    }
+    console.log(`It's a tie. ${playerSelection} = ${computerSelection}.`);
+    return null;
 }
 
 function game() {
@@ -34,17 +30,17 @@ function game() {
             continue;
         }
         let winner = playRound(playerSelection, getComputerChoice());
-        if (winner !==null) {
+        if (winner !== null) {
             score[winner]++;
         }
     }
     outputScore(score);
 }
 
-function outputScore(score){
-    if(score[0] == score[1]) {
+function outputScore(score) {
+    if (score[0] == score[1]) {
         console.log(`The final score is a draw. ${score[0]} : ${score[1]}.`);
-    } else if(score[0] < score[1]) {
+    } else if (score[0] < score[1]) {
         console.log(`Sorry, mate, you lost ${score[0]} : ${score[1]}.`);
     } else {
         console.log(`Congrats! You won ${score[0]} : ${score[1]}.`);
