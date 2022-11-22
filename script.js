@@ -20,7 +20,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    let score = [0, 0]; // index 0 represents the player's score, index 1 represents the computer's score
+    let score = [0, 0]; // [0] holds the player's score, [1] holds the computer's score
     for (let i = 1; i <= 5; i++) {
         let playerSelection = prompt("Your choice: ");
         playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.substring(1).toLowerCase();
