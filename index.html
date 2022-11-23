@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <button>Rock</button>
-    <button>Paper</button>
-    <button>Scissors</button>
+    <div id="header">
+        <h1>Rock - Paper - Scissors</h1>
+    </div>
+    <div id="game-container">
+        <div class="player left">
+            <img src="images/player.png" alt="">
+            <div class="name">Player</div>
+            <div class="choices  left working">
+                <button value="Rock"></button>
+                <button value="Paper"></button>
+                <button value="Scissors"></button>
+            </div>
+        </div>
+        <div class="player right">
+            <img src="images/computer.png" alt="">
+            <div class="name">Computer</div>
+            <div class="choices">
+                <button value="Rock"></button>
+                <button value="Paper"></button>
+                <button value="Scissors"></button>
+
+            </div>
+        </div>
+    </div>
+    <div class="resultbox">
+        
+            <div class="smiley-container"></div>
+        
+        <div class="feedback"></div>
+    </div>
+
+
 </body>
+
 </html>

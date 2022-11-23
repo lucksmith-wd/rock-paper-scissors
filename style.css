@@ -1,0 +1,119 @@
+body {
+    margin: 20px 0 0 0;
+    padding: 0 120px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#header {
+    background-color: #822A29;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 3em;
+    color: white;
+}
+
+#game-container {
+    padding: 50px 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.player {
+    width: 600px;
+    border: solid;
+    margin: 0 0;
+    text-align: center;
+    font-size: 2em;
+    border-radius: 15px;
+}
+
+.player img {
+    height: 200px;
+    width: auto;
+    display: block;
+    margin: 30px auto;
+    border-radius: 15px;
+}
+
+.working button:hover {
+    border: solid #EF7068 4px;
+}
+
+.choices {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.all-smileys {
+    width: 80%;
+    height: 80%;
+    display: block;
+
+}
+
+.resultbox {
+    border-radius: 15px;
+    display: flex;
+    width: 75%;
+    height: 100px;
+    border: solid;
+    margin: 0 auto;
+    align-items: center;
+    font-size: 2em;
+}
+
+.smiley-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100%;
+    padding: 20px;
+}
+
+.feedback {
+    flex: 1;
+}
+
+.choices button {
+    padding: 0;
+    display: block;
+    border-radius: 15px;
+    width: 150px;
+    height: 150px;
+    border: solid 4px;;
+    margin: 30px 0;
+}
+
+button[value="Rock"] {
+    background-image: url(images/rock.png);
+}
+
+button[value="Paper"] {
+    background-image: url(images/paper.png);
+}
+
+button[value="Scissors"] {
+    background-image: url(images/scissors.png);
+}
+
+.newGameButton {
+    padding: 5px 15px;
+    background-color: #822A29;
+    border-radius: 15px;
+    font-size: 2em;
+    display: block;
+    margin: 10px auto;
+    color: white;
+}
+
+button.chosen {
+    border: solid #40E4FF 4px;
+
+}

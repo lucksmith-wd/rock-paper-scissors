@@ -1,62 +1,99 @@
 const CHOICES = ["Rock", "Paper", "Scissors"];
+let score = [0, 0]; // [0] holds the player's score, [1] holds the computer's score
+
+function playRound(e) {
+    initializeRound();
+    let playerSelection = this.value;
+    let computerSelection = getComputerChoice();
+    compButtons[CHOICES.indexOf(computerSelection)].classList.add('chosen');
+    checkRoundOutcome(playerSelection, computerSelection);
+    checkScore();
+}
+
+function initializeRound() {
+    for (let i = 0; i < CHOICES.length; i++) {
+        compButtons[i].classList.remove('chosen');
+    }
+    if (smileyContainer.firstElementChild) smileyContainer.removeChild(smileyContainer.firstElementChild);
+}
+
 function getComputerChoice() {
     return CHOICES[Math.floor(Math.random() * 3)];
 }
 
-function playRound(e) {
-    let playerSelection = this.textContent;
-    let computerSelection = getComputerChoice();
-    let playerValue = CHOICES.indexOf(playerSelection);
-    let computerValue = CHOICES.indexOf(computerSelection);
-    result = playerValue - computerValue;
+function checkRoundOutcome(playerSelection, computerSelection) {
+    let result = CHOICES.indexOf(playerSelection) - CHOICES.indexOf(computerSelection);
     if (result === 1 || result === -2) {
-        console.log(`You win! ${playerSelection} beats ${computerSelection}.`);
-        return 0;
+        smileyContainer.appendChild(smiley);
+        feedback.textContent = `You win! ${playerSelection} beats ${computerSelection}.`;
+        score[0]++;
+    } else if (result === -1 || result === 2) {
+        smileyContainer.appendChild(sadey);
+        feedback.textContent = `You lose! ${computerSelection} beats ${playerSelection}.`;
+        score[1]++;
+    } else {
+        smileyContainer.appendChild(neutraley);
+        feedback.textContent = `It's a tie. ${playerSelection} = ${computerSelection}.`;
     }
-    if (result === -1 || result === 2) {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}.`);
-        return 1;
-    }
-    console.log(`It's a tie. ${playerSelection} = ${computerSelection}.`);
-    return null;
 }
 
-const buttons = document.querySelectorAll('button');
-buttons.forEach(button => button.addEventListener('click', playRound));
-
-    
-
-
-// function game() {
-//     let score = [0, 0]; // [0] holds the player's score, [1] holds the computer's score
-//     for (let i = 1; i <= 5; i++) {
-//         let playerSelection = prompt("Your choice: ");
-//         playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.substring(1).toLowerCase();
-//         if (!validate(playerSelection)) {
-//             console.log("You can only choose 'Rock' / 'Paper' 'Scissors'.")
-//             i--;
-//             continue;
-//         }
-//         let winner = playRound(playerSelection, getComputerChoice());
-//         if (winner !== null) {
-//             score[winner]++;
-//         }
-//     }
-//     outputScore(score);
-// }
-
-// function outputScore(score) {
-//     if (score[0] == score[1]) {
-//         console.log(`The final score is a draw. ${score[0]} : ${score[1]}.`);
-//     } else if (score[0] < score[1]) {
-//         console.log(`Sorry, mate, you lost ${score[0]} : ${score[1]}.`);
-//     } else {
-//         console.log(`Congrats! You won ${score[0]} : ${score[1]}.`);
-//     }
-// }
-
-function validate(playerSelection) {
-    return CHOICES.includes(playerSelection);
+function checkScore() {
+    if (score[0] === 5) {
+        feedback.textContent = `${feedback.textContent}  Congrats! You won ${score[0]} : ${score[1]}`;
+        cleanUp();
+    }
+    if (score[1] === 5) {
+        feedback.textContent = `${feedback.textContent}  Sorry, mate, you lost ${score[0]} : ${score[1]}.`
+        cleanUp();
+    }
 }
 
-// game();
+function cleanUp() {
+    body.appendChild(newGameBtn);
+    playerButtons.forEach(button => button.removeEventListener('click', playRound));
+    playerChoicesContainer.classList.toggle('working');
+}
+
+function startNewGame() {
+    playerButtons.forEach(button => button.addEventListener('click', playRound));
+    body.removeChild(newGameBtn);
+    playerChoicesContainer.classList.toggle('working');
+    for (let i = 0; i < CHOICES.length; i++) {
+        compButtons[i].classList.remove('chosen');
+    }
+    score[0] = 0;
+    score[1] = 0;
+    smileyContainer.removeChild(smileyContainer.firstElementChild);
+    feedback.textContent = '';
+}
+
+
+const playerChoicesContainer = document.querySelector('.working');
+
+const playerButtons = document.querySelectorAll('.left button');
+playerButtons.forEach(button => button.addEventListener('click', playRound));
+
+const feedback = document.querySelector('.feedback');
+
+const smileyContainer = document.querySelector('.smiley-container');
+
+const smiley = document.createElement('img');
+smiley.src = 'images/smiley.png';
+smiley.classList.add('all-smileys');
+
+const sadey = document.createElement('img');
+sadey.src = 'images/sadey.png';
+sadey.classList.add('all-smileys');
+
+const neutraley = document.createElement('img');
+neutraley.src = 'images/neutraley.png';
+neutraley.classList.add('all-smileys');
+
+const newGameBtn = document.createElement('button');
+newGameBtn.textContent = 'New game';
+newGameBtn.classList.add('newGameButton');
+newGameBtn.addEventListener('click', startNewGame);
+
+const body = document.querySelector('body');
+
+const compButtons = document.querySelectorAll('.right .choices button');
